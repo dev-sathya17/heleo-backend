@@ -1,0 +1,1 @@
+this folder contains helper functions that are needed for some form of processing

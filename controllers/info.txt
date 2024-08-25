@@ -1,0 +1,2 @@
+This folder contains all different APIs that will be hit and executed
+To elaborate, this is the place where we communicate with the database for every individual entity
