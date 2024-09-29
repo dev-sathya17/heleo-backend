@@ -1,1 +1,0 @@
-This folder contains all the API endpoints for every individual entity
