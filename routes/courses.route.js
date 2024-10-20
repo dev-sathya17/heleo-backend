@@ -1,15 +1,41 @@
 const express = require("express");
-
+const courseController = require("../controllers/course.controller");
+const auth = require("../middlewares/auth");
 const courseRouter = express.Router();
 
-courseRouter.get("/");
+courseRouter.get(
+  "/",
+  auth.authenticate,
+  // // auth.authorize,
+  courseController.getAllCourses
+);
 
-courseRouter.post("/");
+courseRouter.post(
+  "/",
+  auth.authenticate,
+  // // auth.authorize,
+  courseController.addCourse
+);
 
-courseRouter.get("/:id");
+courseRouter.get(
+  "/:id",
+  auth.authenticate,
+  // // auth.authorize,
+  courseController.getCourse
+);
 
-courseRouter.put("/:id");
+courseRouter.put(
+  "/:id",
+  auth.authenticate,
+  // // auth.authorize,
+  courseController.updateCourse
+);
 
-courseRouter.delete("/:id");
+courseRouter.delete(
+  "/:id",
+  auth.authenticate,
+  // // auth.authorize,
+  courseController.deleteCourse
+);
 
 module.exports = courseRouter;

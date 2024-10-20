@@ -12,7 +12,7 @@ const courseSchema = new mongoose.Schema({
   //   required: true,
   // },
   // students: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
-  books: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }],
+  // books: [{ type: mongoose.Schema.Types.ObjectId, ref: "Book" }], ?not needed for now
   createdAt: {
     type: Date,
     default: Date.now,
@@ -20,6 +20,15 @@ const courseSchema = new mongoose.Schema({
   updatedAt: {
     type: Date,
     default: Date.now,
+  },
+  courseFee: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
+  isDeleted: {
+    type: Boolean,
+    default: false,
   },
 });
 

@@ -13,7 +13,7 @@ const booksController = {
   },
   getAllBooks: async (req, res) => {
     try {
-      const books = await Book.find();
+      const books = await Book.find({ isDeleted: false });
       res.status(200).json(books);
     } catch (err) {
       res.status(500).json({ message: err.message });
@@ -22,7 +22,7 @@ const booksController = {
   getBook: async (req, res) => {
     try {
       const book = await Book.findById(req.params.id);
-      if (!book) {
+      if (!book || book.isDeleted) {
         return res.status(404).json({ message: "Book not found" });
       }
       res.status(200).json(book);
@@ -52,11 +52,12 @@ const booksController = {
   },
   deleteBook: async (req, res) => {
     try {
-      const deletedBook = await Book.findByIdAndDelete(req.params.id);
-      if (!deletedBook) {
+      const book = await Book.findById(req.params.id);
+      if (!book) {
         return res.status(404).json({ message: "Book not found" });
       }
-
+      book.isDeleted = true;
+      await book.save();
       res.status(200).json({ message: "Book deleted successfully" });
     } catch (err) {
       res.status(500).json({ message: err.message });

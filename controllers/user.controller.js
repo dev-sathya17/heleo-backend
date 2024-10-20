@@ -357,12 +357,16 @@ const userController = {
       const { id } = req.params;
 
       // Finding and deleting the user from the database using the id in the request parameters.
-      const user = await User.findByIdAndDelete(id);
+      const user = await User.findById(id);
 
       // If user not found, return error response
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
+
+      user.isDeleted = true;
+
+      await user.save();
 
       const currentUser = User.findById(req.userId);
 

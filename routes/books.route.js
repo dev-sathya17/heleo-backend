@@ -1,16 +1,41 @@
 const express = require("express");
 const booksController = require("../controllers/books.controller");
-
+const auth = require("../middlewares/auth");
 const booksRouter = express.Router();
 
-booksRouter.get("/", booksController.getAllBooks);
+booksRouter.get(
+  "/",
+  auth.authenticate,
+  // auth.authorize,
+  booksController.getAllBooks
+);
 
-booksRouter.post("/", booksController.addBook);
+booksRouter.post(
+  "/",
+  auth.authenticate,
+  // auth.authorize,
+  booksController.addBook
+);
 
-booksRouter.get("/:id", booksController.getBook);
+booksRouter.get(
+  "/:id",
+  auth.authenticate,
+  // auth.authorize,
+  booksController.getBook
+);
 
-booksRouter.put("/:id", booksController.updateBook);
+booksRouter.put(
+  "/:id",
+  auth.authenticate,
+  // auth.authorize,
+  booksController.updateBook
+);
 
-booksRouter.delete("/:id", booksController.deleteBook);
+booksRouter.delete(
+  "/:id",
+  auth.authenticate,
+  // auth.authorize,
+  booksController.deleteBook
+);
 
 module.exports = booksRouter;
